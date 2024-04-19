@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { apiConnector } from '../services/apiConnector';
+import { useNavigate } from 'react-router-dom';
 
 function CatererPage() {
     const [occupiedRooms, setOccupiedRooms] = useState([]);
@@ -52,9 +53,15 @@ function CatererPage() {
             setError('Failed to add food item');
         }
     };
+    const navigate = useNavigate();
+    const logout = () => {
+        localStorage.setItem("user", null);
+        navigate("/");
+    }
 
     return (
-        <div className="flex flex-col w-[50%] mx-auto min-h-[100vh]">
+        <div className="flex flex-col w-[50%] mx-auto min-h-[100vh] relative">
+            <div onClick={logout} className='absolute right-0 max-w-fit px-4 py-2 rounded bg-blue-900 text-white font-semibold hover:bg-blue-950'>logout</div>
             <h2 className="text-4xl font-bold mb-4 text-center">Caterer Page</h2>
             <h3 className="text-xl font-bold mb-2">Search and Add Food Price</h3>
             {/* <form onSubmit={handleAddFoodItem} className="mb-8"> */}

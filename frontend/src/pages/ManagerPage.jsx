@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { apiConnector } from '../services/apiConnector'; // Assuming apiConnector is exported from a separate file
 import { toast } from "react-hot-toast"
+import { useNavigate } from 'react-router-dom';
 
 const ManagerPage = () => {
     const [roomDetails, setRoomDetails] = useState({
@@ -93,8 +94,15 @@ const ManagerPage = () => {
         fetchOccupancy();
     }, []);
 
+    const navigate = useNavigate();
+    const logout = () => {
+        localStorage.setItem("user", null);
+        navigate("/");
+    }
+
     return (
-        <div className="flex flex-col w-[50%] mx-auto">
+        <div className="flex flex-col w-[50%] mx-auto relative">
+            <div onClick={logout} className='absolute right-0 max-w-fit px-4 py-2 rounded bg-blue-900 text-white font-semibold hover:bg-blue-950'>logout</div>
             <h2 className="text-4xl font-bold mb-4 text-center">Manager page</h2>
             <h2 className="text-2xl font-bold mb-4">Add Room</h2>
             {/* <form onSubmit={handleAddRoom} className="mb-8"> */}

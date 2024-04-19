@@ -7,8 +7,16 @@ import HomePage from './pages/HomePage'
 import ManagerPage from './pages/ManagerPage'
 import ReceptionistPage from './pages/ReceptionistPage'
 import CatererPage from './pages/CatererPage'
+import { useNavigate } from 'react-router-dom'
 
 function App() {
+  const navigate = useNavigate();
+  const user = localStorage.getItem('user');
+  const logout = () => {
+    localStorage.setItem("user", null);
+    navigate("/");
+  }
+
 
   return (
     <div
